@@ -28,6 +28,11 @@ module RussianReversal
       return plural_marker.parent.at('span.if').text
     end
 
+    plural_marker = doc.at('span.xr')
+    if plural_marker && plural_marker.text =~ /plural of/
+      return noun
+    end
+
     doc.search('div#relatedentries > ul > li').each do |e|
       if e.at('span.pos').text.gsub( REGEXP_NONWORD, '' ) == 'noun'
         return e.at('span').children.first.text.strip + 's'

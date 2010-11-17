@@ -6,5 +6,7 @@ describe 'RussianReversal' do
     RussianReversal.reverse( 'He eliminated enemies' ).should.equal 'enemies eliminate'
     RussianReversal.reverse( 'He shot an apple' ).should.equal 'apples shoot'
     RussianReversal.reverse( 'He fired the rocket' ).should.equal 'rockets fire'
+    RussianReversal.reverse( 'The cats chased the mice' ).should.equal 'mice chase'
+    RussianReversal.reverse( 'The cat chases the mouse' ).should.equal 'mice chase'
   end
 end
