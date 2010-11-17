@@ -43,7 +43,13 @@ module RussianReversal
   def self.reverse( s )
     sentence = s.en.sentence
 
-    verb_ = strip( sentence.verb )
+    verb_ = nil
+    sentence.linkages[0].words.each do |w|
+      if w =~ /^(.+)\.v$/
+        verb_ = $1
+        break
+      end
+    end
     return  if verb_.nil?
 
     verb = infinitive_of( verb_ )
