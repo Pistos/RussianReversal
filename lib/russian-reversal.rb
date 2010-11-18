@@ -5,8 +5,8 @@ require 'open-uri'
 require 'nokogiri'
 
 module RussianReversal
-  REGEXP_NONWORD = /[^a-zA-Z-]/
-  VERBS_IGNORED = [ 'be', 'have', ]
+  REGEXP_NONWORD = /[^a-zA-Z -]/
+  VERBS_IGNORED = [ 'be', 'have', 'can', ]
   NOUNS_IGNORED = [ 'it', 'him', 'her', 'them', 'me', 'you', ]
 
   def self.strip( s )
@@ -16,13 +16,17 @@ module RussianReversal
   def self.infinitive_of( verb )
     doc = Nokogiri::HTML( open( "http://www.oxfordadvancedlearnersdictionary.com/dictionary/#{verb}" ) )
     doc.search('div#relatedentries > ul > li').each do |e|
-      pos = e.at('span.pos')
-      if pos && pos.text.gsub( REGEXP_NONWORD, '' ) == 'verb'
-        v = e.at('span').children.first.text.strip
-        if VERBS_IGNORED.include?( v )
-          return nil
-        else
-          return v
+      pos_element = e.at('span.pos')
+      if pos_element
+        pos = pos_element.text.gsub( REGEXP_NONWORD, '' )
+        return  if pos == 'modal verb' || pos == 'auxiliary verb'
+        if pos == 'verb'
+          v = e.at('span').children.first.text.strip
+          if VERBS_IGNORED.include?( v )
+            return
+          else
+            return v
+          end
         end
       end
     end

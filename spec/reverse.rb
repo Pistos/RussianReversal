@@ -21,6 +21,7 @@ describe 'RussianReversal' do
     RussianReversal.reverse( "There won't be a video." ).should.be.nil
     RussianReversal.reverse( "He has an object." ).should.be.nil
     RussianReversal.reverse( "He was a criminal." ).should.be.nil
+    RussianReversal.reverse( "He might be a criminal." ).should.be.nil
   end
 
   it "doesn't activate on pronouns" do
