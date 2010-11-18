@@ -45,7 +45,9 @@ module RussianReversal
 
     verb_ = nil
     if verb_.nil?
-      verb_ = strip( sentence.verb )
+      if sentence.verb
+        verb_ = strip( sentence.verb )
+      end
     end
     sentence.linkages[0].words.each do |w|
       if w =~ /^(.+)\.v$/
@@ -58,6 +60,7 @@ module RussianReversal
     verb = infinitive_of( verb_ )
     return  if verb.nil?
 
+    return  if sentence.object.nil?
     object = strip( sentence.object )
     return  if object =~ REGEXP_NONWORD
     plural = plural_of( object )
