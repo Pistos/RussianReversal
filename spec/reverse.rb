@@ -17,19 +17,25 @@ describe 'RussianReversal' do
     RussianReversal.reverse( 'He needs a NotARealEnglishWord' ).should.be.nil
   end
 
-  it "doesn't activate on basic and auxiliary verbs" do
+  it "doesn't activate on basic, auxiliary or modal verbs" do
     RussianReversal.reverse( "There won't be a video." ).should.be.nil
     RussianReversal.reverse( "He has an object." ).should.be.nil
     RussianReversal.reverse( "He was a criminal." ).should.be.nil
     RussianReversal.reverse( "He might be a criminal." ).should.be.nil
+    RussianReversal.reverse( "He ought to be good." ).should.be.nil
   end
 
-  it "doesn't activate on pronouns" do
+  it "doesn't activate on pronouns or demonstratives" do
     RussianReversal.reverse( 'They shot him' ).should.be.nil
     RussianReversal.reverse( 'They shot her' ).should.be.nil
     RussianReversal.reverse( 'They shot me' ).should.be.nil
     RussianReversal.reverse( 'They shot you' ).should.be.nil
     RussianReversal.reverse( 'They shot them' ).should.be.nil
+    RussianReversal.reverse( 'They shot us' ).should.be.nil
     RussianReversal.reverse( 'They shot it' ).should.be.nil
+    RussianReversal.reverse( 'They shot this' ).should.be.nil
+    RussianReversal.reverse( 'They shot that' ).should.be.nil
+    RussianReversal.reverse( 'They shot these' ).should.be.nil
+    RussianReversal.reverse( 'They shot those' ).should.be.nil
   end
 end
