@@ -22,4 +22,13 @@ describe 'RussianReversal' do
     RussianReversal.reverse( "He has an object." ).should.be.nil
     RussianReversal.reverse( "He was a criminal." ).should.be.nil
   end
+
+  it "doesn't activate on pronouns" do
+    RussianReversal.reverse( 'They shot him' ).should.be.nil
+    RussianReversal.reverse( 'They shot her' ).should.be.nil
+    RussianReversal.reverse( 'They shot me' ).should.be.nil
+    RussianReversal.reverse( 'They shot you' ).should.be.nil
+    RussianReversal.reverse( 'They shot them' ).should.be.nil
+    RussianReversal.reverse( 'They shot it' ).should.be.nil
+  end
 end

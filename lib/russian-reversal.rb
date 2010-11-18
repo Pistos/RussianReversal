@@ -7,6 +7,7 @@ require 'nokogiri'
 module RussianReversal
   REGEXP_NONWORD = /[^a-zA-Z-]/
   VERBS_IGNORED = [ 'be', 'have', ]
+  NOUNS_IGNORED = [ 'it', 'him', 'her', 'them', 'me', 'you', ]
 
   def self.strip( s )
     s.gsub( /\..*$/, '' )
@@ -28,6 +29,8 @@ module RussianReversal
   end
 
   def self.plural_of( noun )
+    return nil  if NOUNS_IGNORED.include?( noun.downcase )
+
     doc = Nokogiri::HTML( open( "http://www.oxfordadvancedlearnersdictionary.com/dictionary/#{noun}" ) )
 
     plural_marker = doc.at('span.z_il')

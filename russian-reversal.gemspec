@@ -2,7 +2,7 @@ require 'rubygems'
 
 spec = Gem::Specification.new do |s|
   s.name = 'russian-reversal'
-  s.version = '1.0.4'
+  s.version = '1.0.5'
   s.summary = 'Takes simple English sentences and provides the Russian Reversal verb phrase'
   s.description = s.summary
   s.homepage = 'https://github.com/Pistos/RussianReversal'
