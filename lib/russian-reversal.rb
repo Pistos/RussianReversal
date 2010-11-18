@@ -44,6 +44,9 @@ module RussianReversal
     sentence = s.en.sentence
 
     verb_ = nil
+    if verb_.nil?
+      verb_ = strip( sentence.verb )
+    end
     sentence.linkages[0].words.each do |w|
       if w =~ /^(.+)\.v$/
         verb_ = $1
