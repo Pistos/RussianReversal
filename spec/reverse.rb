@@ -11,6 +11,15 @@ describe 'RussianReversal' do
     RussianReversal.reverse( 'The tanks decimated the platoon.' ).should.equal 'platoons decimate'
     RussianReversal.reverse( 'The chef prepared a delicious meal.' ).should.equal 'meals prepare'
     RussianReversal.reverse( 'The hungry lions were devouring a sheep.' ).should.equal 'sheep devour'
-    RussianReversal.reverse( 'he needs a NotARealEnglishWord' ).should.be.nil
+  end
+
+  it 'remains silent on parse failures' do
+    RussianReversal.reverse( 'He needs a NotARealEnglishWord' ).should.be.nil
+  end
+
+  it "doesn't activate on basic and auxiliary verbs" do
+    RussianReversal.reverse( "There won't be a video." ).should.be.nil
+    RussianReversal.reverse( "He has an object." ).should.be.nil
+    RussianReversal.reverse( "He was a criminal." ).should.be.nil
   end
 end

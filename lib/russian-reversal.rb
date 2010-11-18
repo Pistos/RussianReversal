@@ -6,6 +6,7 @@ require 'nokogiri'
 
 module RussianReversal
   REGEXP_NONWORD = /[^a-zA-Z-]/
+  VERBS_IGNORED = [ 'be', 'have', ]
 
   def self.strip( s )
     s.gsub( /\..*$/, '' )
@@ -14,8 +15,14 @@ module RussianReversal
   def self.infinitive_of( verb )
     doc = Nokogiri::HTML( open( "http://www.oxfordadvancedlearnersdictionary.com/dictionary/#{verb}" ) )
     doc.search('div#relatedentries > ul > li').each do |e|
-      if e.at('span.pos').text.gsub( REGEXP_NONWORD, '' ) == 'verb'
-        return e.at('span').children.first.text.strip
+      pos = e.at('span.pos')
+      if pos && pos.text.gsub( REGEXP_NONWORD, '' ) == 'verb'
+        v = e.at('span').children.first.text.strip
+        if VERBS_IGNORED.include?( v )
+          return nil
+        else
+          return v
+        end
       end
     end
   end
