@@ -38,6 +38,8 @@ module RussianReversal
         return e.at('span').children.first.text.strip + 's'
       end
     end
+
+    nil
   end
 
   def self.reverse( s )

@@ -11,5 +11,6 @@ describe 'RussianReversal' do
     RussianReversal.reverse( 'The tanks decimated the platoon.' ).should.equal 'platoons decimate'
     RussianReversal.reverse( 'The chef prepared a delicious meal.' ).should.equal 'meals prepare'
     RussianReversal.reverse( 'The hungry lions were devouring a sheep.' ).should.equal 'sheep devour'
+    RussianReversal.reverse( 'he needs a NotARealEnglishWord' ).should.be.nil
   end
 end
