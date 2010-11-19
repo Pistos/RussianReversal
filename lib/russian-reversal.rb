@@ -14,6 +14,8 @@ module RussianReversal
   end
 
   def self.infinitive_of( verb )
+    return  if verb =~ REGEXP_NONWORD
+
     doc = Nokogiri::HTML( open( "http://www.oxfordadvancedlearnersdictionary.com/dictionary/#{verb}" ) )
     doc.search('div#relatedentries > ul > li').each do |e|
       pos_element = e.at('span.pos')

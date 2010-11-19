@@ -23,6 +23,7 @@ describe 'RussianReversal' do
     RussianReversal.reverse( "He was a criminal." ).should.be.nil
     RussianReversal.reverse( "He might be a criminal." ).should.be.nil
     RussianReversal.reverse( "He ought to be good." ).should.be.nil
+    RussianReversal.reverse( "yeah, and it's horrible to install onigurama versions" ).should.be.nil
   end
 
   it "doesn't activate on pronouns or demonstratives" do
