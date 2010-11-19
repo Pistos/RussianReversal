@@ -6,7 +6,7 @@ require 'nokogiri'
 
 module RussianReversal
   REGEXP_NONWORD = /[^a-zA-Z -]/
-  VERBS_IGNORED = [ 'be', 'have', 'can', ]
+  VERBS_IGNORED = [ 'be', 'become', 'can', 'do', 'get', 'go', 'have', 'put', 'say',  ]
   NOUNS_IGNORED = [ 'it', 'him', 'her', 'them', 'me', 'you', 'us', 'this', 'that', 'these', 'those', ]
 
   def self.strip( s )
