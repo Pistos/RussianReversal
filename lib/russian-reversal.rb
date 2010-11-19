@@ -19,17 +19,18 @@ module RussianReversal
     doc = Nokogiri::HTML( open( "http://www.oxfordadvancedlearnersdictionary.com/dictionary/#{verb}" ) )
     doc.search('div#relatedentries > ul > li').each do |e|
       pos_element = e.at('span.pos')
-      if pos_element
-        pos = pos_element.text.gsub( REGEXP_NONWORD, '' )
-        return  if pos == 'modal verb' || pos == 'auxiliary verb'
-        if pos == 'verb'
-          v = e.at('span').children.first.text.strip
-          if VERBS_IGNORED.include?( v )
-            return
-          else
-            return v
-          end
-        end
+      next  if pos_element.nil?
+
+      pos = pos_element.text.gsub( REGEXP_NONWORD, '' )
+      return  if pos == 'modal verb' || pos == 'auxiliary verb'
+
+      next  if pos != 'verb'
+
+      v = e.at('span').children.first.text.strip
+      if VERBS_IGNORED.include?( v )
+        return
+      else
+        return v
       end
     end
   end
